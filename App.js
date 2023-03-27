@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import HomeScreen from "./screens/HomeScreen";
+import {QueryClient, QueryClientProvider} from "react-query";
+import {StatusBar} from "react-native";
+import {Fragment} from "react";
+import RestaurantScreen from "./screens/RestaurantScreen";
+import Provider from "react-redux";
+import {store} from "./store";
+
+const Stack = createNativeStackNavigator();
+const queryClient = new QueryClient();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    return (
+        <Fragment>
+            <StatusBar style="auto"/>
+            <NavigationContainer>
+                <Provider store={ store }>
+                    <QueryClientProvider client={queryClient}>
+                        <Stack.Navigator>
+                            <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
+                            <Stack.Screen name="Restaurant" component={RestaurantScreen} options={{headerShown: false}} />
+                        </Stack.Navigator>
+                    </QueryClientProvider>
+                </Provider>
+            </NavigationContainer>
+        </Fragment>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

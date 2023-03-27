@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d98f3b90-c152-4c5d-b919-6ab6359568de"
+      }
+    },
+    "owner": "shabnam.yusifzada"
   }
 }
